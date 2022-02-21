@@ -1,0 +1,838 @@
+HTML
+
+pre
+
+mark - highlight, ins -> underline
+
+<cite> ,address ,em, i
+
+#00FFFFFF
+-> transperancyRGB
+
+HSL-> hue(0,120,240)[Color],S(Intensity & grey),L->Lightness
+
+CSS-> parent to children
+
+<link rel="stylesheet" href="style.css" >
+MBPC-> Box Model
+
+<a>
+tag with-> _blank-- new tab,
+_self-- same 
+window,parent--frame & top full body of window
+
+<a>->href= mailto:gmail.com
+
+document.location="takes you to that location"
+
+a has active,link,visited,hover
+
+#id to create bookmark
+
+<img src="workplace.jpg" alt="Workplace" usemap="#workmap">
+
+<map name="workmap">
+  <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+  <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+  <area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm">
+</map>
+
+src,alt,width,height,usemap
+
+circle,rect,poly,default
+(x1,y1,x2,y2)
+
+<map name="workmap">
+  <area shape="circle" coords="337,300,44" href="coffee.htm" onclick="myFunction()">
+</map>
+
+
+picture tag to contain multiple images
+
+background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+to stretch: add property 100% ,100%
+
+<picture>
+  <source media="(min-width: 650px)" srcset="img_food.jpg">
+  <source media="(min-width: 465px)" srcset="img_car.jpg">
+  <img src="img_girl.jpg">
+</picture>
+Bandwidth & Img formats
+
+<picture>
+  <source srcset="img_avatar.png">
+  <source srcset="img_girl.jpg">
+  <img src="img_beatles.gif" alt="Beatles" style="width:auto;">
+</picture>
+
+Favicon:-
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+Table:
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+td can contain anything: text,image,lists,other tables
+
+border-color,border-collapse
+border-style,border-radius
+
+<th style="width:70%">Firstname</th>
+
+th {
+  text-align: left;
+}
+
+colspan:
+<th colspan="2">Name</th>
+
+<table style="width:100%">
+  <caption>Monthly savings</caption>
+  <tr>
+
+
+th, td {
+  padding: 15px;
+}
+
+|> Cell content spaceCell padding is the space between the cell edges and the cell content.
+
+th, td {
+  padding-top: 1px;
+  padding-bottom: 2px;
+  padding-left: 3px;
+  padding-right: 40px;
+}
+
+table {
+  border-spacing: 12px;
+}
+
+  <tr>
+    <th>Name</th>
+    <th>First Name</th>
+    <td>Jill</td>
+// for column heading do th th th
+  </tr>
+  <tr>
+    <th rowspan="2">Phone</th>
+    <td>555-1234</td>
+//for row heading do th then tr and then th 
+  </tr>
+
+
+rowspan & colspan are respective
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+
+To have Horizontal border:
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+table must be border collapsed when applying styles to tr alone;
+
+Note: The <colgroup> tag must be a child of a <table> element and should be placed before any other table elements, like <thead>, <tr>, <td> etc., but after the <caption> element, if present.
+
+<table style="width: 100%;">
+<colgroup>
+  <col span="2" style="background-color: #D6EEEE">
+</colgroup>
+
+<table style="width: 100%;">
+<colgroup>
+  <col span="3">
+  <col span="2" style="background-color: pink">
+</colgroup>
+
+ol-> ordered list
+ul-> unordered
+li-> list
+
+dl-> description list
+dt-> title
+dd-> data
+
+ul-> disc,circle,square,None
+style='list-style-type:square'
+
+A list item (<li>) can contain a new list, and other HTML elements, like images and links, etc.
+
+
+
+type="1"	 (default)
+type="A"	
+type="a"	
+type="I"	
+type="i"
+
+<ol start="50">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+
+
+Here are the block-level elements in HTML:
+:-> complete width,new line,top & bottom margin
+<address><article><aside><blockquote><canvas><dd><div><dl><dt><fieldset><figcaption><figure><footer><form><h1>-<h6><header><hr><li><main><nav><noscript><ol><p><pre><section><table><tfoot><ul><video>
+
+
+
+Here are the inline elements in HTML:
+
+<a><abbr><acronym><b><bdo><big><br><button><cite><code><dfn><em><i><img><input><kbd><label><map><object><output><q><samp><script><select><small><span><strong><sub><sup><textarea><time><tt><var>
+
+document.getElementsByClassName("city");
+
+document.getElementById("myHeader").innerHTML
+
+Iframe:
+
+<iframe src="demo_iframe.htm" style="border:2px solid red;" title="Iframe Example"></iframe>
+always add title for screen readers:
+
+Iframe - Target for a Link
+
+<iframe src="demo_iframe.htm" name="iframe_a" height="300px" width="100%" title="Iframe Example"></iframe>
+
+<p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+
+<p>When the target attribute of a link matches the name of an iframe, the link will open in the iframe.</p>
+
+document.getElementById("demo").style.fontSize = "25px";
+document.getElementById("demo").style.color = "red";
+document.getElementById("demo").style.backgroundColor = "yellow";
+document.getElementById("image").src = "picture.gif";
+document.getElementById('demo').innerHTML = Date();
+
+<noscript>	Defines an alternate content for users that do not support client-side scripts
+
+<img src="images/picture.jpg">	The "picture.jpg" file is located in the images folder in the current folder
+<img src="/images/picture.jpg">	The "picture.jpg" file is located in the images folder at the root of the current web
+
+The <head> element is a container for metadata (data about data)
+
+Metadata typically define the document title, character set, styles, scripts, and other meta information.
+
+charset='UTF-8'
+
+name="keywords" content="supportive keywords'
+description,""
+author,"SANDESH
+http-equiv="refresh" content='30'
+viewport width=device-width,initial-scale=1.0
+
+Base Tag:
+
+The <base> element specifies the base URL and/or target for all relative URLs in a page.
+
+The <base> tag must have either an href or a target attribute present, or both.
+
+There can only be one single <base> element in a document!
+
+HTML Layout:
+
+CSS: framework,float,flexbox,grid
+
+What is Responsive Web Design?
+Responsive Web Design is about using HTML and CSS to automatically resize, hide, shrink, or enlarge, a website, to make it look good on all devices (desktops, tablets, and phones):
+
+Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.
+
+@media screen and (max-width: 800px) {
+  .left, .main, .right {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}
+
+The above sets the width to 100% till widthof screen is 800px
+
+<kbd>Ctrl +s </kbd>
+<p><samp>File not found.<br>Press F1 to continue</samp></p>
+<code>
+x = 5;
+y = 6;
+z = x + y;
+</code>
+<var>Italics</var>
+
+Semantic Elements:
+
+A semantic element clearly describes its meaning to both the browser and the developer.
+eg. <form>  <table>
+
+"A section is a thematic grouping of content, typically with a heading."
+
+The <article> element specifies independent, self-contained content.
+
+The <header> element represents a container for introductory content or a set of navigational links
+
+The <nav> element defines a set of navigation links.
+
+The <aside> element defines some content aside from the content it is placed in (like a sidebar).
+
+The <aside> content should be indirectly related to the surrounding content.
+
+<details>
+  <summary>Open</summary>
+  <p>Contents</p>
+</details>
+
+The <time> tag defines a specific time (or datetime).
+
+The datetime attribute of this element is used translate the time into a machine-readable format so that browsers can offer to add date reminders through the user's calendar, and search engines can produce smarter search results.
+
+However, we strongly recommend to always add the <html> and <body> tags!
+
+Omitting <body> can produce errors in older browsers.
+
+Omitting <html> and <body> can also crash DOM and XML software.
+
+<html lang="en-us">
+For Language support
+<mark>Yellow Highlight</mark>
+
+HTML Entities:
+
+To display a less than sign (<) we must write: &lt; or &#60;
+
+&lt is entityname
+& #60 is entity_number
+
+If you write 10 spaces in your text, the browser will remove 9 of them. To add real spaces to your text, you can use the &nbsp; character entity.
+
+The non-breaking hyphen (&#8209;) is used to define a hyphen character (‑) that does not break into a new line.
+
+
+non-breaking space	&nbsp;	&#160;	
+<	less than	&lt;	&#60;	
+>	greater than	&gt;	&#62;	
+&	ampersand	&amp;	&#38;	
+"	double quotation mark	&quot;	&#34;	
+'	single quotation mark (apostrophe)	&apos;	&#39;	
+¢	cent	&cent;	&#162;	
+£	pound	&pound;	&#163;	
+¥	yen	&yen;	&#165;	
+€	euro	&euro;	&#8364;	
+©	copyright	&copy;	&#169;	
+®	registered trademark	&reg;	&#174;
+
+ ̀	a	a&#768;	à
+
+😄 is 128516
+😍 is 128525
+💗 is 128151
+above ones are UTF characters
+
+48 -> 0
+
+ ASCII defined 128 different characters that could be used on the internet: numbers (0-9), English letters (A-Z), and some special characters like ! $ + - ( ) @ < > .
+
+A Uniform Resource Locator (URL) is used to address a document (or other data) on the web.
+
+scheme://prefix.domain:port/path/filename
+URL encoding converts non-ASCII characters into a format that can be transmitted over the Internet.
+
+URL encoding replaces non-ASCII characters with a "%" followed by hexadecimal digits.
+
+URLs cannot contain spaces. URL encoding normally replaces a space with a plus (+) sign, or %20.
+
+What is XHTML?
+XHTML stands for EXtensible HyperText Markup Language
+XHTML is a stricter, more XML-based version of HTML
+XHTML is HTML defined as an XML application
+XHTML is supported by all major browsers
+
+Correct:
+<input type="checkbox" name="vehicle" value="car" checked="checked" />
+<input type="text" name="lastname" disabled="disabled" />
+Wrong:
+<input type="checkbox" name="vehicle" value="car" checked />
+<input type="text" name="lastname" disabled />
+
+
+The <form> Element
+
+The <form> element is a container for different types of input elements, such as: text fields, checkboxes, radio buttons, submit buttons, etc.
+
+All the different form elements are covered in this chapter:
+
+Form:
+
+The action attribute defines the action to be performed when the form is submitted
+
+ The target attribute can have one of the following values:
+
+Value	Description
+_blank	The response is displayed in a new window or tab
+_self	The response is displayed in the current window
+_parent	The response is displayed in the parent frame
+_top	The response is displayed in the full body of the window
+framename	The response is displayed in a named iframe
+
+Get method:
+2048,no bookmark
+query like google
+not for sensitive data
+
+Post method:
+Can send Large amounts of data
+no character restri > 2048
+cannot be bookmarked<form action="/action_page.php" autocomplete="on">
+
+
+<form action="/action_page.php" autocomplete="on">
+
+<form action="/action_page.php" novalidate>
+
+<label>
+
+The for attribute of the <label> tag should be equal to the id attribute of the <input> element to bind them together.
+
+<label for="fname">First name:</label>
+<input type="text" id="fname" name="fname">
+
+Dropdown:
+
+<select id='Anyid' name='crs'>
+<option value= "volvo">Volvobus</option>
+</select>
+
+default selected
+
+<option value="fiat" selected>Fiat</option>
+
+Size in Option:
+Use the size attribute to specify the number of visible values:
+<select id="cars" name="cars" size="3">
+
+Multiple Selections:
+
+<select id="cars" name="cars" size="4" multiple>
+
+text area  <textarea name="message" rows="10" cols="300">The cat was playing in the garden.</textarea>
+
+  <textarea name="message" style="width:200px; height:600px;">The cat was playing in the garden.</textarea>
+
+
+The <fieldset> element is used to group related data in a form.
+
+The <legend> element defines a caption for the <fieldset> element.
+
+  <fieldset>
+    <legend>Personalia:</legend>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <input type="submit" value="Submit">
+  </fieldset>
+
+The <datalist> Element
+The <datalist> element specifies a list of pre-defined options for an <input> element.
+ The list attribute of the <input> element, must refer to the id attribute of the <datalist> element.
+  <input list="browsers">
+  <datalist id="browsers">
+    <option value="Internet Explorer">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+  </datalist>
+
+Output:
+
+The <output> element represents the result of a calculation (like one performed by a script).
+
+optiongroup:
+
+    <optgroup label="Swedish Cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+    </optgroup>
+    <optgroup label="German Cars">
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </optgroup>
+Just to grouyp
+<output name="x" for="a b"></output>
+
+Input Types:
+
+<input type="date" id="birthday" name="birthday" min="2021-01-01" max="2021-12-31">
+type="datetime-local"
+type="file" takes care of File operations
+
+type='submit' takes care of submit
+
+The <input type="hidden"> defines a hidden input field (not visible to a user).
+
+A hidden field let web developers include data that cannot be seen or modified by users when a form is submitted.
+
+A hidden field often stores what database record that needs to be updated when the form is submitted.
+
+type="month"
+
+<input type="number" id="quantity" name="quantity" min="1" max="5">
+
+checked	Specifies that an input field should be pre-selected when the page loads (for type="checkbox" or type="radio")
+disabled	Specifies that an input field should be disabled
+max	Specifies the maximum value for an input field
+maxlength	Specifies the maximum number of character for an input field
+min	Specifies the minimum value for an input field
+pattern	Specifies a regular expression to check the input value against
+readonly	Specifies that an input field is read only (cannot be changed)
+required	Specifies that an input field is required (must be filled out)
+size	Specifies the width (in characters) of an input field
+step	Specifies the legal number intervals for an input field
+value	Specifies the default value for an input field
+
+<input type="number" id="quantity" name="quantity" min="0" max="100" step="10" value="30">
+
+<input type="range" id="vol" name="vol" min="0" max="50">
+
+<input type="search" id="gsearchX" name="gsearchX">
+
+<input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{2}-[0-9]{10}" required>
+
+<input type="time" id="appt" name="appt">
+
+<input type="url" id="homepage" name="homepage">
+
+<input type="week" id="week" name="week">
+
+Attributes:
+Value:
+The input value attribute specifies an initial value for an input field:
+
+Readonly:
+<input type="text" id="fname" name="fname" value="John" readonly><br>
+The input readonly attribute specifies that an input field is read-only.
+
+disabled:
+
+The input disabled attribute specifies that an input field should be disabled.
+
+A disabled input field is unusable and un-clickable.
+
+The value of a disabled input field will not be sent when submitting the form!
+<input type="text" id="fname" name="fname" value="John" disabled><br>
+
+size: default is 20
+<input type="text" id="fname" name="fname" size="50"><br>
+
+maxlength:
+maxlength="6" Pincode
+
+Select Multiple files:
+
+  <input type="file" id="files" name="files" multiple><br><br>
+
+Placeholder:
+
+  <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br><br>
+
+Required:
+
+<input type="text" id="username" name="username" required>
+
+Step:
+Example: if step="3", legal numbers could be -3, 0, 3, 6, etc.
+<input type="number" id="points" name="points" step="3">
+
+Note: Input restrictions are not foolproof, and JavaScript provides many ways to add illegal input. To safely restrict input, it must also be checked by the receiver (the server)!
+
+Autofocus:
+
+The input autofocus attribute specifies that an input field should automatically get focus when the page loads.
+<input type="text" id="fname" name="fname" autofocus><br>
+
+Height & Width:
+image to be used to submit
+
+  <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">
+
+Tip: Always specify both the height and width attributes for images. If height and width are set, the space required for the image is reserved when the page is loaded. Without these attributes, the browser does not know the size of the image, and cannot reserve the appropriate space to it. The effect will be that the page layout will change during loading (while the images load).
+
+DataList:
+  <input list="browsers">
+  <datalist id="browsers">
+
+Autocomplete
+
+<form action="/action_page.php" autocomplete="on">
+
+Form Attribute:
+
+<form action="/action_page.php" id="form1">
+  <label for="fname">First name:</label>
+</form>
+
+<label for="lname">Last name:</label>
+<input type="text" id="lname" name="lname" form="form1">
+
+Form Action :
+Has powers like sudo:
+
+<input type="submit" formaction="/action_page2.php" value="Submit as Admin">
+
+Formenctype:
+
+Specifies enc method
+  
+<input type="submit" formenctype="multipart/form-data"
+  value="Submit as Multipart/form-data">
+
+Formmethod:
+
+Get & Post
+
+<form action="/action_page.php" method="get">
+
+  <input type="submit" formmethod="post" value="Submit using POST">
+
+Form Target:
+
+  <input type="submit" formtarget="_blank" value="Submit to a new window/tab">
+
+The formnovalidate Attribute
+
+The input formnovalidate attribute specifies that an <input> element should not be validated when submitted.
+
+  <input type="submit" formnovalidate="formnovalidate"
+  value="Submit without validation">
+
+The Novalidate Attritube:
+
+<form action="/action_page.php" novalidate>
+
+ALL form..* attributes goes inside input
+
+Canvas:
+
+Graphics contaziner
+
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+</canvas>
+
+Javascript can be added here:
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(0,0);
+ctx.lineTo(100,100);
+ctx.stroke();
+</script>
+
+Drawing Circle:
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+ctx.stroke();
+</script>
+
+Draw Text:
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.font = "30px Arial";
+ctx.fillText("Hello World", 10, 50);
+</script>
+
+Gradients:
+
+var grd = ctx.createLinearGradient(0, 0, 200, 0);
+grd.addColorStop(0, "red");
+grd.addColorStop(1, "white");
+
+
+var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+grd.addColorStop(0, "red");
+grd.addColorStop(1, "white");
+
+
+SVG:
+
+The HTML <svg> element is a container for SVG graphics.
+
+SVG stands for Scalable Vector Graphics
+SVG is used to define graphics for the Web
+SVG is a W3C recommendation
+
+  <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+
+  <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+  style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+
+<ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+#grad1 is the id
+
+Canvas Vs SVG
+
+SVG is 2D graphics in XML
+Cnvas is 2D graphics on fly
+Svg elements can be attached with event handlers JS
+When attributes are changed then browser automatically re renders the page
+
+Canvs is pixel to pixel,needs to redrawn on change
+
+Canvas best for Games
+SVG is best for GoogleMaps
+
+Multimedia Formats:
+
+extensions like: .wav, .mp3, .mp4, .mpg, .wmv, and .avi.
+
+moving pictures expert group
+
+Audio Video Interleaven Microsoft
+Supported Ones:
+
+Flash,Ogg,WebM,mp4
+
+Audio:
+
+Wav->ibm &Mi,
+--> MP3,Wav, Ogg
+
+Video Format:
+The controls attribute adds video controls, like play, pause, and volume.
+
+It is a good idea to always include width and height attributes. If height and width are not set, the page might flicker while the video loads.
+
+The <source> element allows you to specify alternative video files which the browser may choose from. The browser will use the first recognized format.
+
+The text between the <video> and </video> tags will only be displayed in browsers that do not support the <video> element.
+
+<video width="320" height="240" autoplay muted controls>
+  <source src="movie.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+There are ways to control over video elements like load,play,pause
+And corresp events
+
+Same functions are present on Audio as well
+
+Object Tag:
+
+Support from all browsers:
+
+It was designed to embed plug-ins (like Java applets, PDF readers, and Flash Players) in web pages, but can also be used to include HTML in HTML:
+
+<object width="100%" height="500px" data="snippet.html"></object>
+<object data="audi.jpeg"></object>
+
+Embed Tag:
+
+Same usecase as above Img ANd html ..
+
+
+YouTube:
+
+YouTube - Autoplay + Muted
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
+</iframe>
+
+&loop=1 to loop forever
+
+controls=0 to not to have controls in the video player
+
+Geolocation API
+
+The HTML Geolocation API is used to locate a user's position.
+
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+
+navigator.geolocation.getCurrentPosition(showPosition)
+
+To display on Map 
+ var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=
+  "+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
+
+
+watchPosition() - Returns the current position of the user and continues to return updated position as the user moves (like the GPS in a car).
+clearWatch() - Stops the watchPosition() method
+
+Drag And Drop:
+
+<img draggable="true">
+
+
+HTML WEB STORAGE:
+
+if (typeof(Storage) !== "undefined") {
+  // Code for localStorage/sessionStorage.
+} else {
+  // Sorry! No Web Storage support..
+}
+
+Directly assignable like this : localStorage.c = 1;
+
+WEB WORKER:
+
+A web worker is a JavaScript running in the background, without affecting the performance of the page.
+typeof(Worker)
+w= new Worker('demo_workers.js')
+w.terminate();
+Since web workers are in external files, they do not have access to the following JavaScript objects:
+
+The window object
+The document object
+The parent object
+
+Here, we create a script that counts. The script is stored in the "demo_workers.js" file:
+
+var i = 0;
+
+function timedCount() {
+  i = i + 1;
+  postMessage(i);
+  setTimeout("timedCount()",500);
+}
+
+timedCount();
+
+The important part of the code above is the postMessage() method - which is used to post a message back to the HTML page.
+
+Note: Normally web workers are not used for such simple scripts, but for more CPU intensive tasks.
+
+Server Sent Events:
+
+onopen	    When a connection to the server is opened
+onmessage	 When a message is received
+onerror 	When an error occurs

@@ -1,5 +1,10 @@
 
+1)Doctor Strange has an array with a dimension  but Loki messes up with the array and makes it as a multidimensional array.Doctor Strange needs your help to convert the multidimensional array to single dimension array again. Write a function and help him.
+Input let mArray = [1,[2,[3,[4,5]],6],7,[8,9],[10]]
+Output [1,2,3,4,5,6,7,8,9,10]
 
+2) Move all 0 the elements to the right 
+3)
 
 
 

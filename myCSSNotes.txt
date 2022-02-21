@@ -1,0 +1,455 @@
+CSS
+After HTML 3.2
+to solve problems like css <font>
+
+Selectors:
+Simple selectors (select elements based on name, id, class)
+Combinator selectors (select elements based on a specific relationship between them)
+Pseudo-class selectors (select elements based on a certain state)
+Pseudo-elements selectors (select and style a part of an element)
+Attribute selectors (select elements based on an attribute or attribute value)
+
+An Id or class name cannot start with number
+20px is right 20  px is wrong
+style tag can be added to body as well
+or inside any tag like h1
+
+1) Inline
+2) External or Internal based on order
+Recent one will have more priority
+3)Browser default
+
+background:
+background-size: auto|length|cover|contain|initial|inherit;
+background-color: green;
+  opacity: 0.3;
+ffffffoo
+background-image: url("paper.gif");
+background-repeat: repeat-x;repeat-y
+background-attachment: fixed;scroll
+background-position: right top;
+background-clip: padding-box;margin-box,content-box;
+MBPC
+
+Border:
+border-style:dotted,dashed,solid,double,groove,ridge,inset,outset,none,hidden
+
+The border-width property specifies the width of the four borders.
+
+The width can be set as a specific size (in px, pt, cm, em, etc) or by using one of the three pre-defined values: thin, medium, or thick:
+
+border-width: 25px 10px 4px 35px;
+TRBL
+border-color: red green blue yellow;
+border-top-style: dotted;
+  border-right-style: solid;
+  border-bottom-style: dotted;
+  border-left-style: solid;
+
+border-radius: 5px;
+border-left-width: 15px;
+
+Margin:--
+
+CSS has properties for specifying the margin for each side of an element:
+
+margin-top
+margin-right
+margin-bottom
+margin-left
+All the margin properties can have the following values:
+
+auto - the browser calculates the margin
+length - specifies a margin in px, pt, cm, etc.
+% - specifies a margin in % of the width of the containing element
+inherit - specifies that the margin should be inherited from the parent element
+
+To horizontally align :
+div {
+  width: 100px;
+  margin: auto;
+  text-align:center;
+  border: 1px solid red;
+}
+
+padding-top
+padding-right
+padding-bottom
+padding-left
+All the padding properties can have the following values:
+
+length - specifies a padding in px, pt, cm, etc.
+% - specifies a padding in % of the width of the containing element
+inherit - specifies that the padding should be inherited from the parent element
+
+Here, the <div> element is given a width of 300px. However, the actual width of the <div> element will be 350px (300px + 25px of left padding + 25px of right padding):
+
+div {
+  width: 300px;
+  padding: 25px;
+}
+To keep the width at 300px, no matter the amount of padding, you can use the box-sizing property. This causes the element to maintain its actual width; if you increase the padding, the available content space will decrease.
+ box-sizing: border-box;
+
+outline-style
+outline-color
+outline-width
+outline-offset
+outline
+Note: Outline differs from borders! Unlike border, the outline is drawn outside the element's border, and may overlap other content. Also, the outline is NOT a part of the element's dimensions; the element's total width and height is not affected by the width of the outline.
+
+  outline-offset: 15px;
+to add space between border & outline
+
+text-align: left,right,center,justify;
+
+  direction: rtl;
+  unicode-bidi: bidi-override;
+ to have text right to left in reversed order
+
+vertical-align:baseline,text-top,text-bottom,sub,super;
+
+text-decoration: overline; line-through; underline;none;
+
+text-transform: uppercase,lowercase,capitalize;
+
+text-indent: 50px;
+Add those many spaces for the first line
+
+letter-spacing: 5px;
+Space the letters of the text
+
+line-height: to specify the length between lines
+
+word-spacing: 10px;
+
+ white-space: nowrap;
+
+can be used instead of pre
+
+text-shadow: 2px(hori) 2px(vertical) 5px(blur) red;
+text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF; red& blue combination
+
+text-overflow: clip|ellipsis|string|initial|inherit;
+
+ font-family: "Times New Roman", Times, serif;
+  --> Generic family, Example Font Names
+
+font-family: Tahoma, Verdana, sans-serif;
+give fallback, generic font-family
+
+Serif
+Sans-serif
+Monospace
+Cursive
+Fantasy
+
+Vw responsive:
+Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.
+
+Font-pairings is also important
+The font property is a shorthand property for:
+
+font-style
+normal - The text is shown normally
+italic - The text is shown in italics
+oblique - The text is "leaning" (oblique is very similar to italic, but less supported)
+
+font-variant
+normal,small-caps
+
+font-weight
+normal,bold
+
+font-size/line-height
+font-family
+Note: The font-size and font-family values are required. If one of the other values is missing, their default value are used.
+
+Links:
+a-> active,visited,hover,link
+
+can give image as list style:
+ul {
+  list-style-image: url('sqpurple.gif');
+}
+
+To give position:
+list-style-position: outside;,inside
+
+Remove default settings:
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+CSS Tables:-
+vetical-align: top,middle,bottom;
+text-align:left,right,center;
+Responsiveness:
+
+<div style="overflow-x:auto;">
+
+Caption-Position:
+
+  caption-side: bottom; or top
+
+The table-layout property defines the algorithm used to lay out table cells, rows, and columns.
+
+Tip: The main benefit of table-layout: fixed; is that the table renders much faster. On large tables, users will not see any part of the table until the browser has rendered the whole table. So, if you use table-layout: fixed, users will see the top of the table while the browser loads and renders rest of the table. This gives the impression that the page loads a lot quicker!
+
+  empty-cells: hide;show the border;
+
+border-collapse: separate;//default
+
+DISPLAY:
+
+The display property is the most important CSS property for controlling layout.
+
+Examples of block-level elements:
+
+<div>
+<h1> - <h6>
+<p>
+<form>
+<header>
+<footer>
+<section>
+Full width & new line
+
+Inline->
+<span>
+<a>
+<img>
+
+Display: none;
+
+example script tag
+
+display:none would remove an element
+
+visibility hidden would only hide
+
+CSS LAYOUT:
+
+max-width: won't go beyond this, resizable if screen goes low then resizes to low rather than scroller
+
+ The position Property:
+
+Static-> it is always positioned according to the normal flow of the page:
+,top,b,l,r won't affect,
+Default 
+
+Relative->is positioned relative to its normal position.
+Setting the top, right, bottom, and left properties of a relatively-positioned element will cause it to be adjusted away from its normal position.
+
+Fixed-> always stays fixed wrt to viewport , TRBL works
+which means it always stays in the same place even if the page is scrolled
+Example: side icons
+Overlaps always
+
+ absolute-> Position is based on the nearest ancestor if no ancester then positioned wrt to body
+They are removed from normal workflows,
+Overlaps
+
+Sticky: is combination of Relative & Fixed
+First it's tries to relative wrt to viewport
+When scrolls the element sticks to Fixed
+Initilly like relative
+
+Absolute is used to overwrite on top something
+
+example image and My Name
+
+img {
+  position: absolute;
+  clip: rect(0px,60px,200px,0px);
+}
+simply clips the items
+
+Z-index:
+
+ z-index only works on positioned elements (position: absolute, position: relative, position: fixed, or position: sticky) and flex items (elements that are direct children of display: flex elements).
+
+If two positioned elements overlap each other without a z-index specified, the element defined last in the HTML code will be shown on top.
+
+Overflow:
+
+The overflow property has the following values:
+
+visible - Default. The overflow is not clipped. The content renders outside the element's box
+hidden - The overflow is clipped, and the rest of the content will be invisible
+scroll - The overflow is clipped, and a scrollbar is added to see the rest of the content
+auto - Similar to scroll, but it adds scrollbars only when necessary
+
+overflow-wrap: normal|anywhere|break-word|initial|inherit;
+
+Float:
+
+The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
+
+Clear:
+
+The clear property specifies what should happen with the element that is next to a floating element.
+
+The clear property can have one of the following values:
+
+none - The element is not pushed below left or right floated elements. This is default
+left - The element is pushed below left floated elements
+right - The element is pushed below right floated elements
+both - The element is pushed below both left and right floated elements
+inherit - The element inherits the clear value from its parent
+
+Modern hack:
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+What is box-sizing?
+
+You can easily create three floating boxes side by side. However, when you add something that enlarges the width of each box (e.g. padding or borders), the box will break. The box-sizing property allows us to include the padding and border in the box's total width (and height), making sure that the padding stays inside of the box and that it does not break.
+
+Inline-block:
+
+Doesn't start with new line, 
+Width and height can be set
+
+Inline-> However margin & padding can be set
+
+CSS Align:
+
+margin:auto; will align horizontally
+Note: Absolute positioned elements are removed from the normal flow, and can overlap elements.
+
+The clearfix Hack
+
+Note: If an element is taller than the element containing it, and it is floated, it will overflow outside of its container. You can use the "clearfix hack" to fix this (see example below).
+
+
+
+
+CSS Combinators:
+
+1) Descendant: It selects all
+div p {
+  background-color: yellow;
+}
+
+2) Child Selector(>): It selects all but not descendants ,but with div  P pattern
+div > p {
+  background-color: yellow;
+}
+
+3) Adjacent Selector: selects exact neighbour 
+div + p{
+
+selects only 1 exact neighbour below it.
+}
+
+Pseudo-elements:
+
+selector:pseudo-class {
+  property: value;
+}
+
+Note: a:hover MUST come after a:link and a:visited in the CSS definition in order to be effective! a:active MUST come after a:hover in the CSS definition in order to be effective! Pseudo-class names are not case-sensitive.
+
+p:first-child {
+  color: blue;
+}
+Matches first child of any parent level
+
+:lang(no)-> lang psuedoclass
+
+q:lang(no) {
+  quotes: "~" "~";
+}
+
+<p>Some text <q lang="no">A quote in a paragraph</q> Some text.</p>
+
+PseudoClass: 
+:class
+
+pseudo elements:
+::element
+
+All CSS Pseudo Classes
+Selector	Example	Example description
+:active	a:active	Selects the active link
+:checked	input:checked	Selects every checked <input> element
+:disabled	input:disabled	Selects every disabled <input> element
+:empty	p:empty	Selects every <p> element that has no children
+:enabled	input:enabled	Selects every enabled <input> element
+:first-child	p:first-child	Selects every <p> elements that is the first child of its parent
+:first-of-type	p:first-of-type	Selects every <p> element that is the first <p> element of its parent
+:focus	input:focus	Selects the <input> element that has focus
+:hover	a:hover	Selects links on mouse over
+:in-range	input:in-range	Selects <input> elements with a value within a specified range
+:invalid	input:invalid	Selects all <input> elements with an invalid value
+:lang(language)	p:lang(it)	Selects every <p> element with a lang attribute value starting with "it"
+:last-child	p:last-child	Selects every <p> elements that is the last child of its parent
+:last-of-type	p:last-of-type	Selects every <p> element that is the last <p> element of its parent
+:link	a:link	Selects all unvisited links
+:not(selector)	:not(p)	Selects every element that is not a <p> element
+:nth-child(n)	p:nth-child(2)	Selects every <p> element that is the second child of its parent
+:nth-last-child(n)	p:nth-last-child(2)	Selects every <p> element that is the second child of its parent, counting from the last child
+:nth-last-of-type(n)	p:nth-last-of-type(2)	Selects every <p> element that is the second <p> element of its parent, counting from the last child
+:nth-of-type(n)	p:nth-of-type(2)	Selects every <p> element that is the second <p> element of its parent
+:only-of-type	p:only-of-type	Selects every <p> element that is the only <p> element of its parent
+:only-child	p:only-child	Selects every <p> element that is the only child of its parent
+:optional	input:optional	Selects <input> elements with no "required" attribute
+:out-of-range	input:out-of-range	Selects <input> elements with a value outside a specified range
+:read-only	input:read-only	Selects <input> elements with a "readonly" attribute specified
+:read-write	input:read-write	Selects <input> elements with no "readonly" attribute
+:required	input:required	Selects <input> elements with a "required" attribute specified
+:root	root	Selects the document's root element
+:target	#news:target	Selects the current active #news element (clicked on a URL containing that anchor name)
+:valid	input:valid	Selects all <input> elements with a valid value
+:visited	a:visited	Selects all visited links
+All CSS Pseudo Elements
+Selector	Example	Example description
+::after	p::after	Insert content after every <p> element
+::before	p::before	Insert content before every <p> element
+::first-letter	p::first-letter	Selects the first letter of every <p> element
+::first-line	p::first-line	Selects the first line of every <p> element
+::selection	p::selection	Selects the portion of an element that is selected by a user
+
+What are Pseudo-Elements?
+A CSS pseudo-element is used to style specified parts of an element.
+Notice the double colon notation - ::first-line versus :first-line
+
+The double colon replaced the single-colon notation for pseudo-elements in CSS3. This was an attempt from W3C to distinguish between pseudo-classes and pseudo-elements.
+
+The single-colon syntax was used for both pseudo-classes and pseudo-elements in CSS2 and CSS1.
+
+For backward compatibility, the single-colon syntax is acceptable for CSS2 and CSS1 pseudo-elements.
+
+p:hover::first-letter {
+  color: #ff0000;
+  font-size: xx-large;
+}
+Both can be cobined:
+
+All CSS Pseudo Elements
+Selector	Example	Example description
+::after	p::after	Insert something after the content of each <p> element
+::before	p::before	Insert something before the content of each <p> element
+::first-letter	p::first-letter	Selects the first letter of each <p> element
+::first-line	p::first-line	Selects the first line of each <p> element
+::marker	::marker	Selects the markers of list items
+::selection	p::selection	Selects the portion of an element that is selected by a user
+
+opacity more the image is clear
+
+4)General Sibling selector(~): Slects all neighbour not the first one
+div ~ p {
+  background-color: yellow;
+}
+
+p.center-> paragraph with class center
+h1,h2,h3{
+This is grouping css selectors
+}
+*-> selects all
