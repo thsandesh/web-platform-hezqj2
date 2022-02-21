@@ -1,0 +1,613 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+proxy=http://localhost:3128/
+strict-ssl=false
+registry=https://registry.npmjs.org/
+https-proxy=http://localhost:3128/
+http-proxy=http://localhost:3128
+cert="-----END CERTIFICATE-----"
+key="Bag Attributes\n   -----END PRIVATE KEY-----"
+@athena-atetrm-npm:registry=https://athena.daimler.com/artifactory/api/npm/ATETRM_npm/
+//athena.daimler.com/artifactory/api/npm/ATETRM_npm/:_authToken=eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJxTGRYeGJqYVpYeVpWMEk5d3ZqZ0ZkN0h5NkJRTDlSYndjM2JheGI2T0c4In0.eyJzdWIiOiJqZnJ0QDAxYzVrY216MG41OTFxMHB2MGFzc3YwbTMyXC91c2Vyc1wvc2FuZGVzaCIsInNjcCI6Im1lbWJlci1vZi1ncm91cHM6KiBhcGk6KiIsImF1ZCI6ImpmcnRAMDFjNWtjbXowbjU5MXEwcHYwYXNzdjBtMzIiLCJpc3MiOiJqZnJ0QDAxYzVrY216MG41OTFxMHB2MGFzc3YwbTMyXC91c2Vyc1wvc2FuZGVzaCIsImlhdCI6MTYwNjk5ODcwNSwianRpIjoiNGM4ZmRiNzEtODJjMC00ZTBhLTkwZmQtYTI4NjNmZmMyNjFiIn0.MwYUdNFxHBAzARSQ8saw68OJ4_DGhAap0m1QZBslYZ_0-Nsj6Ibheu3IyfGlHW63ugGggzExmOuDeXJVuHhGYotDjS4ofyf2Xwq2brmCm8J7fcWUj-POaFIbV1CT6y51vcW_dBmbZ-SLfUK1S2bAl1X0raKI84o_gzD4k-jIYzUOxI_RwJtBW3JsbjVfxzFDBSqNqU0ZpwnsP6Ks0m7yyYURsSW2s_gJWzTuFxo5zKwjaA5T1VhEwqE6Lw67VIf8nR2ybsaXrRIX1_oAYGwaymWvwplQCz5zT8mPcClax2GeeRnknOkaKkoewqKxhSbT_8HkN6bWtSTaz6XP7DBiGw
+
+
+
+
+
+#!/bin/bash
+
+clear
+
+echo "\n#####################################################"
+echo "Getting User Information"
+echo "#####################################################\n"
+
+echo "Please type in your NT-User (e.g. ABC2ABT) [Continue with ENTER] :"
+read nt
+
+echo "Please type in your NT-User Password [Continue with ENTER] :"
+stty -echo
+read pwd
+stty echo
+
+clear
+
+echo "\n#####################################################"
+echo "Setup APT Proxy"
+echo "#####################################################\n"
+
+echo "Creating apt.conf file"
+
+sudo rm -f /etc/apt/apt.conf
+sudo touch /etc/apt/apt.conf
+
+echo "File created"
+
+echo "Acquire::http::Proxy	\"http://$nt:$pwd@rb-proxy-de.bosch.com:8080/\";" | sudo tee /etc/apt/apt.conf > /dev/null 2>&1
+echo "Acquire::https::Proxy	\"http://$nt:$pwd@rb-proxy-de.bosch.com:8080/\";" | sudo tee --append /etc/apt/apt.conf > /dev/null 2>&1
+
+# Acquire::http::Proxy	"http://nt:pwd@rb-proxy-de.bosch.com:8080/";
+# Acquire::https::Proxy	"http://nt:pwd@rb-proxy-de.bosch.com:8080/";
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+
+sudo apt-get -y install cntlm git python3-pip curl
+
+clear
+
+echo "\n#####################################################"
+echo "Setup CNTLM"
+echo "#####################################################\n"
+
+echo "Type in your Domain (e.g de): [Continue with ENTER] "
+read domain
+
+echo "Username        $nt" | sudo tee /etc/cntlm.conf
+echo "Domain		$domain" | sudo tee --append /etc/cntlm.conf
+
+echo "Please type in your NT-User Password [Continue with ENTER] :"
+cntlm -u $nt@$domain -H | tail -n 3 | sudo tee --append /etc/cntlm.conf
+echo "Proxy           rb-proxy-$domain.bosch.com:8080" | sudo tee --append /etc/cntlm.conf
+echo "NoProxy         localhost, 127.0.0.*, 10.*, 192.168.*, *.bosch.com" | sudo tee --append /etc/cntlm.conf
+
+#echo "10.60.101.97" | sudo tee --append /etc/cntlm.conf
+echo "Listen          localhost:3128" | sudo tee --append /etc/cntlm.conf
+#echo "Listen          10.60.101.97:3128" | sudo tee --append /etc/cntlm.conf
+
+sudo /etc/init.d/cntlm restart
+
+echo "CNTLM has been configured."
+
+echo "" | sudo tee --append /etc/environment
+echo "http_proxy=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "https_proxy=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "ftp_proxy=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "no_proxy=\"localhost,127.0.0.1\"" | sudo tee --append /etc/environment
+
+echo "HTTP_PROXY=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "HTTPS_PROXY=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "FTP_PROXY=\"http://127.0.0.1:3128/\"" | sudo tee --append /etc/environment
+echo "NO_PROXY=\"localhost,127.0.0.1\"" | sudo tee --append /etc/environment
+
+sudo rm -f /etc/apt/apt.conf
+sudo touch /etc/apt/apt.conf
+
+echo "Acquire::http::Proxy	\"http://127.0.0.1:3128/\";" | sudo tee /etc/apt/apt.conf > /dev/null 2>&1
+echo "Acquire::https::Proxy	\"http://127.0.0.1:3128/\";" | sudo tee --append /etc/apt/apt.conf > /dev/null 2>&1
+
+clear
+
+echo "#####################################################\n"
+echo "Configuring the Certificates"
+echo "#####################################################\n"
+
+echo "Please copy your certificate to the same directory as this script!"
+echo "Please type in the Name of the certificate [Continue with ENTER] :"
+
+read cert
+
+cert_dest=~/ath_cert
+
+mkdir $cert_dest
+
+openssl pkcs12 -in "${cert}" -nodes -nocerts -out "${cert_dest}"/cert-dap.key
+openssl pkcs12 -in "${cert}" -nodes -clcerts -out "${cert_dest}"/cert-dap.crt
+
+git config --global http.sslCert "${cert_dest}"/cert-dap.crt
+git config --global http.sslKey "${cert_dest}"/cert-dap.key
+git config --global http.sslCaInfo /etc/ssl/certs/ca-certificates.crt
+git config --global http.proxy http://127.0.0.1:3128
+
+sudo mv $cert $cert_dest/
+
+cd ~/
+git clone https://athena.daimler.com/bitbucket/scm/atrob/athena.git
+
+echo "\n#####################################################"
+echo "Configuration finished!"
+echo "#####################################################\n"
+
+echo "To access the Daimler DAP website you need to add the certificate in firefox (certificate got copied to ~/ath_cert)"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+''' Read input from STDIN. Print your output to STDOUT '''
+    #Use input() to read input from STDIN and use print to write your output to STDOUT
+
+# def main():
+#     V = input()
+#     N = int(input())
+#     B = {}
+#     for x in range(N):
+#         a={
+#             "value": input(),
+#             "result": 'NEGATIVE'
+#         }
+#         B[x] = a
+#     length=len(V)
+#     for x in range(N):
+#         sample = B[x]['value']
+#         # print(sample)
+#         tsort = []
+#         alphabets = {}
+#         fault = 0
+#         # i = 0
+#         # print(i,V.rindex(sample[i],10))
+#         for i in range(len(sample)):
+#             if(not alphabets.get(sample[i])):
+#                 letterC = V.count(sample[i])
+#                 letterOA = []
+#                 letterOA.append(V.find(sample[i]))
+#                 for c in range(letterC - 1):
+#                     letterOA.append(V.find(sample[i],letterOA[c]+1))
+#                 alphabets[sample[i]] = letterOA
+#             letterC = len(alphabets[sample[i]])
+#             letterOA = alphabets[sample[i]]
+#             # print('Occurence',i,sample[i],letterOA,letterC,tsort)
+#             if((letterC == 0) or i == 0):
+#                 tsort.append(letterOA[0])
+#             else:
+#                 for item in range(letterC):
+#                     # if(i == 0):
+#                     #     tsort.append(letterOA[item])
+#                     # print(i,letterOA[item],tsort)
+#                     if(letterOA[item] >= tsort[i-1]):
+#                         tsort.append(letterOA[item])
+#                         break
+#                     if(item == (letterC - 1)):
+#                         tsort.append(letterOA[item])
+#                         fault = 1
+#                         break
+#                 if(fault):
+#                     break
+#         flag1 = 0
+#         slist1 = tsort[:]
+#         slist1.sort()
+#         if (slist1 == tsort):
+#             flag1 = 1
+#         # printing result
+#         try:
+#             f=tsort.index(-1)
+#             # print('f',f)
+#         except ValueError as ve:
+#             if ((flag1)) :
+#                 # print ("Yes, List2 is sorted." and (len(tsort) == len(sample)))
+#                 B[x]['result'] = 'POSITIVE'
+#             # else :
+#             #     # print ("No, List2 is not sorted.")
+#             #     B[x]['result'] = 'NEGATIVE'
+#         # if(slist == sorted(slist) or slist == sorted(slist2)):
+#         #     B[x]['result'] = 'POSITIVE'
+#     for x in range(N):
+#         print(B[x]['result'])
+#     #print(V,N,B)
+
+
+#  # Write code here 
+
+# main()
+
+
+# ''' Read input from STDIN. Print your output to STDOUT '''
+#     #Use input() to read input from STDIN and use print to write your output to STDOUT
+
+# def main():
+#     V = input()
+#     N = int(input())
+#     B = {}
+#     for x in range(N):
+#         a={
+#             "value": input(),
+#             "result": 'NEGATIVE'
+#         }
+#         B[x] = a
+#     length=len(V)
+#     for x in range(N):
+#         sample = B[x]['value']
+#         # print(sample)
+#         slist = []
+#         slist2 = []
+#         tsort = []
+#         i = 0
+#         # print(i,V.rindex(sample[i],10))
+#         for i in range(len(sample)):
+#             letterC = V.count(sample[i])
+#             letterOA = []
+#             letterOA.append(V.find(sample[i]))
+#             for c in range(letterC - 1):
+#                 letterOA.append(V.find(sample[i],letterOA[c]+1))
+#             print('Occurence',i,sample[i],letterOA,letterC,tsort)
+#             if((letterC == 0) or i == 0):
+#                 tsort.append(letterOA[0])
+#             else:
+#                 for item in range(letterC):
+#                     # if(i == 0):
+#                     #     tsort.append(letterOA[item])
+#                     print(i,letterOA[item],tsort)
+#                     if(letterOA[item] >= tsort[i-1]):
+#                         tsort.append(letterOA[item])
+#                         break
+#                     if(item == (letterC - 1)):
+#                         tsort.append(letterOA[item])
+
+#             # print('tsort',tsort)
+
+#             # try:
+#             #     print(i,V.rindex(sample[i]))
+#             #     slist.append(V.rindex(sample[i]))
+#             #     slist2.append(V.index(sample[i]))
+#             # except ValueError as ve:
+#             #     B[x]['result'] = 'NEGATIVE'
+#         # print(slist,slist2,sorted(slist2),slist == sorted(slist2),slist == sorted(slist))
+#         # print('tsort',tsort)
+#         # printing result
+#         # =---
+#         # flag = 0
+#         # slist1 = slist[:]
+#         # slist1.sort()
+#         # if (slist1 == slist):
+#         #     flag = 1
+#         # =---
+#         # printing result
+#         # if (flag and (len(slist2) == len(sample))) :
+#         #     print ("Yes, List is sorted.")
+#         #     B[x]['result'] = 'POSITIVE'
+#         # else :
+#         #     print ("No, List is not sorted.")
+#         # ------
+#         # flag1 = 0
+#         # slist1 = slist2[:]
+#         # slist1.sort()
+#         # if (slist1 == slist2):
+#         #     flag1 = 1
+#         # # printing result
+#         # print(slist,slist2,flag1,flag,len(slist2) == len(sample),len(sample))
+#         # if ((flag1 or flag) and (len(slist2) == len(sample))) :
+#         #     # print ("Yes, List2 is sorted.")
+#         #     B[x]['result'] = 'POSITIVE'
+#         # else :
+#         #     # print ("No, List2 is not sorted.")
+#         #     B[x]['result'] = 'NEGATIVE'
+#         flag1 = 0
+#         slist1 = tsort[:]
+#         slist1.sort()
+#         if (slist1 == tsort):
+#             flag1 = 1
+#         # printing result
+#         try:
+#             f=tsort.index(-1)
+#             # print('f',f)
+#         except ValueError as ve:
+#             if ((flag1) and (len(tsort) == len(sample))) :
+#                 # print ("Yes, List2 is sorted.")
+#                 B[x]['result'] = 'POSITIVE'
+#             else :
+#                 # print ("No, List2 is not sorted.")
+#                 B[x]['result'] = 'NEGATIVE'
+
+        
+        
+        
+#         # if(slist == sorted(slist) or slist == sorted(slist2)):
+#         #     B[x]['result'] = 'POSITIVE'
+#     for x in range(N):
+#         print(B[x]['result'])
+#     #print(V,N,B)
+
+
+#  # Write code here 
+
+# main()
+
+''' Read input from STDIN. Print your output to STDOUT '''
+    #Use input() to read input from STDIN and use print to write your output to STDOUT
+
+def main():
+    V = input()
+    N = int(input())
+    B = {}
+    for x in range(N):
+        a={
+            "value": input(),
+            "result": 'NEGATIVE'
+        }
+        B[x] = a
+    length=len(V)
+    for x in range(N):
+        flag = 1
+        g = V
+        sample = B[x]['value']
+        print(sample)
+        for i in sample:
+            if i not in g:
+                flag = 0
+                break
+            elif(i in g):
+                r= g.index(i)
+                g= g[r+1:]
+                print(r,i,g)
+        if(flag==0):
+            print('NEGATIVE')
+        else:
+            print('POSITIVE')
+        
+
+
+
+ # Write code here 
+
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let stringInput = process.argv[2]
+let stringArray = [];
+let l = stringInput.length;
+let r ;
+for(let i of stringInput)
+{
+let re = new RegExp(i, "g");
+r=stringInput.replace(re,'');
+stringArray.push(r);
+}
+stringArray.sort();
+console.log('Answer',stringArray[0])
+
+
+
+
+
+
+let range1 = parseInt(process.argv[2])
+let range2 = parseInt(process.argv[3])
+let isPrime,isHisTwinPrime;
+let twinPairs = []
+function isThisAPrimeNumber(input){
+    for(j=2;j<=input/2;j++)
+    {
+        if(input%j == 0){
+            return false;
+        }
+    }
+    return true
+}
+for(i=range1; i<=(range2-2); i++)
+{
+    isPrime=isThisAPrimeNumber(i);
+    if(isPrime)
+    {
+        isHisTwinPrime=isThisAPrimeNumber(i+2);
+        if (isHisTwinPrime) {
+            let twinPair = [i, i + 2]
+            twinPairs.push(twinPair)
+            i = i + 2
+        }
+    }
+}
+console.log('TwinPairs',twinPairs,count)
+
+
+
+
+
+
+count = 0
+def is_prime(n):
+   global count
+   count=count+1
+   for i in range(2, n):
+      if n % i == 0:
+         return False
+   return True
+
+def generate_twins(start, end):
+   for i in range(start, end):
+      j = i + 2
+      if(is_prime(i) and is_prime(j)):
+         print("{:d} and {:d}".format(i, j))
+
+generate_twins(1, 10000)
+print('count',count)
+
+
+
+
+
+
+
+
+
+
+
+
+// let n= process.argv[2]
+// for(let i=0;i<n;i++)
+// {
+//     let k=n;
+//     while(k>(i+1))
+//     {
+//         process.stdout.write(' ')
+//         k--;
+//     }
+//     for(let j=i+1;j>0;j--){
+//         process.stdout.write('*')
+//     }
+//     console.log('');
+// }
+
+
+
+// const foo = () =>{
+//     return {
+//         bar:"hello"
+//     };
+// }
+
+// const foo2 = () =>{
+//     return {
+//         bar:"hello"
+//     };
+// }
+
+// console.log('v',foo()==foo2())
+
+// let x;
+// let y=x===null;
+// console.log('\n',y)
+
+
+
+
+
+
+
+let n= parseInt(process.argv[2])
+for(let i=0;i<n;i++)
+{
+    // console.log('I',i)
+    if(i < parseInt(n/2))
+    {
+        for(let a=i;a<parseInt((n/2));a++)
+        {
+            process.stdout.write(' ')
+            // console.log('a',a)
+        }
+        for(let b=parseInt((n/2))-i;b<=parseInt((n)/2)+i;b++)
+        {
+            process.stdout.write('*')
+            // console.log('b',b);
+        }
+        // for(let c=parseInt((n+i+1)/2);c<=(n);c++)
+        // {
+        //     process.stdout.write(' ',c)
+        //     // console.log('c',c);
+        // }
+    }
+    if(i==parseInt(n/2))
+    {
+        c=0
+        while(c<n){
+            process.stdout.write('*')
+            c++ 
+        }
+    }
+    if(i > parseInt(n/2))
+    {  
+        //  console.log(i,parseInt((n+i)/2))
+        for(let a=parseInt((n/2));a>i-parseInt((n/2));a--)
+        {
+            process.stdout.write(' ')
+            // console.log('a',a)
+        }
+        for(let b=i-parseInt(n/2);b<=parseInt(n/2)-i+1;b++)
+        {
+            process.stdout.write('*')
+            // console.log('b',b);
+        }
+        // for(let b=n;b<=parseInt(n/2)+i;b++)
+        // {
+            
+        //     // console.log('b',b);
+        // }
+    }
+
+    
+    console.log('');
+}
+
+
+
+
